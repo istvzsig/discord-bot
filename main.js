@@ -4,7 +4,7 @@ const { Client, Collection, GatewayIntentBits } = require("discord.js");
 const logger = require("./src/utility/logger.js");
 
 const client = new Client({
-  intents: [GatewayIntentBits.Guilds],
+  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers],
 });
 client.commands = new Collection();
 
