@@ -2,6 +2,8 @@ const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
 module.exports = {
   category: "Utility",
+  cooldown: 5,
+
   data: new SlashCommandBuilder()
     .setName("help")
     .setDescription("Show all commands"),

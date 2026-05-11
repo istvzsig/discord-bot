@@ -2,6 +2,8 @@ const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 
 module.exports = {
   category: "Moderation",
+  cooldown: 10,
+
   data: new SlashCommandBuilder()
     .setName("clear")
     .setDescription("Delete a number of messages from chat")

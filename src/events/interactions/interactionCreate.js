@@ -1,5 +1,8 @@
+const cooldowns = new Map();
+
 module.exports = {
   name: "interactionCreate",
+  category: "Interaction",
 
   async execute(interaction, client) {
     if (!interaction.isChatInputCommand()) return;
@@ -8,6 +11,40 @@ module.exports = {
 
     if (!command) return;
 
+    // =========================
+    // COOLDOWN SYSTEM
+    // =========================
+
+    if (command.cooldown) {
+      const key = `${interaction.user.id}-${command.data.name}`;
+
+      const currentTime = Date.now();
+
+      const cooldownAmount = command.cooldown * 1000;
+
+      if (cooldowns.has(key)) {
+        const expirationTime = cooldowns.get(key) + cooldownAmount;
+
+        if (currentTime < expirationTime) {
+          const remaining = ((expirationTime - currentTime) / 1000).toFixed(1);
+
+          return interaction.reply({
+            content: `⏳ Wait ${remaining}s before using this command again.`,
+          });
+        }
+      }
+
+      cooldowns.set(key, currentTime);
+
+      setTimeout(() => {
+        cooldowns.delete(key);
+      }, cooldownAmount);
+    }
+
+    // =========================
+    // COMMAND EXECUTION
+    // =========================
+
     try {
       await command.execute(interaction, client);
     } catch (error) {
@@ -15,13 +52,11 @@ module.exports = {
 
       if (interaction.replied || interaction.deferred) {
         await interaction.followUp({
-          content: "There was an error.",
-          ephemeral: true,
+          content: "❌ Error executing command.",
         });
       } else {
         await interaction.reply({
-          content: "There was an error.",
-          ephemeral: true,
+          content: "❌ Error executing command.",
         });
       }
     }
