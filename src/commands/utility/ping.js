@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
+const config = require("../../config/config.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -6,6 +7,6 @@ module.exports = {
     .setDescription("Replies with Pong!"),
 
   async execute(interaction) {
-    await interaction.reply("🏓 Pong!");
+    await interaction.reply(JSON.stringify("🏓 Pong!"));
   },
 };
