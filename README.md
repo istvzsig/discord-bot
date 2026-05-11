@@ -1,6 +1,6 @@
 # Discord Bot Framework
 
-A scalable Discord.js bot template.
+A scalable Discord.js bot framework.
 
 ## Features
 
