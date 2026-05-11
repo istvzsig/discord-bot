@@ -1,3 +1,5 @@
+const embeds = require("../../utility/embeds");
+
 const cooldowns = new Map();
 
 module.exports = {
@@ -29,7 +31,11 @@ module.exports = {
           const remaining = ((expirationTime - currentTime) / 1000).toFixed(1);
 
           return interaction.reply({
-            content: `⏳ Wait ${remaining}s before using this command again.`,
+            embeds: [
+              embeds.warn(
+                `⏳ Wait ${remaining}s before using this command again.`,
+              ),
+            ],
           });
         }
       }
@@ -52,11 +58,11 @@ module.exports = {
 
       if (interaction.replied || interaction.deferred) {
         await interaction.followUp({
-          content: "❌ Error executing command.",
+          embeds: [embeds.warn(`❌ Error executing command.`)],
         });
       } else {
         await interaction.reply({
-          content: "❌ Error executing command.",
+          embeds: [embeds.warn(`❌ Error executing command.`)],
         });
       }
     }

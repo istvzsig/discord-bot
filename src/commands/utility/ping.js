@@ -1,5 +1,7 @@
 const { SlashCommandBuilder } = require("discord.js");
 
+const embeds = require("../../utility/embeds");
+
 module.exports = {
   category: "Utility",
   cooldown: 5,
@@ -9,6 +11,9 @@ module.exports = {
     .setDescription("Replies with Pong!"),
 
   async execute(interaction) {
-    await interaction.reply("🏓 Pong!");
+    await interaction.reply({
+      content: "🏓 Pong!",
+      // embeds: [embeds.success("🏓 Pong!")],
+    });
   },
 };

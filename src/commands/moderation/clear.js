@@ -1,5 +1,7 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 
+const embeds = require("../../utility/embeds");
+
 module.exports = {
   category: "Moderation",
   cooldown: 10,
@@ -19,9 +21,12 @@ module.exports = {
     const amount = interaction.options.getInteger("amount");
 
     if (amount < 1 || amount > 100) {
-      return interaction.reply({
-        content: "You can only delete between 1 and 100 messages.",
-        ephemeral: true,
+      return await interaction.reply({
+        embeds: [
+          embeds.console.warn([
+            `You can only delete between 1 and 100 messages.`,
+          ]),
+        ],
       });
     }
 
@@ -31,15 +36,17 @@ module.exports = {
       const deleted = await channel.bulkDelete(amount, true);
 
       await interaction.reply({
-        content: `🧹 Deleted ${deleted.size} messages.`,
-        ephemeral: true,
+        embeds: [embeds.success(`🧹 Deleted ${deleted.size} messages.`)],
       });
     } catch (err) {
       console.error(err);
 
       await interaction.reply({
-        content: "Failed to delete messages. They might be older than 14 days.",
-        ephemeral: true,
+        embeds: [
+          embeds.error(
+            `Failed to delete messages. They might be older than 14 days.`,
+          ),
+        ],
       });
     }
   },

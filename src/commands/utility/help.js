@@ -1,4 +1,6 @@
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
+
+const embeds = require("../../utility/embeds");
 
 module.exports = {
   category: "Utility",
@@ -23,14 +25,19 @@ module.exports = {
       );
     });
 
-    const embed = new EmbedBuilder()
+    // Use centralized embed system
+    const embed = embeds
+      .info("Available commands")
       .setTitle("📚 Bot Commands")
-      .setDescription("Available commands")
-      .setColor("Blue");
+      .setThumbnail(client.user.displayAvatarURL())
+      .setFooter({
+        text: `${client.user.username} Help System`,
+      });
 
+    // Add categories dynamically
     for (const category in categories) {
       embed.addFields({
-        name: category,
+        name: `📂 ${category}`,
         value: categories[category].join("\n"),
       });
     }
