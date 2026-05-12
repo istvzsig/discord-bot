@@ -3,8 +3,9 @@ require("dotenv").config();
 const { Client, Collection, GatewayIntentBits } = require("discord.js");
 
 const { BOT_TOKEN } = require("./src/config/config.js");
-const logger = require("./src/utility/logger.js");
 const db = require("./src/database");
+const registry = require("./src/items/itemRegistry.js");
+const logger = require("./src/utility/logger.js");
 
 const connectMongo = require("./src/database/connect.js");
 
@@ -18,6 +19,7 @@ async function start() {
 
   logger.info("Bot is starting...");
 
+  registry.load();
   await connectMongo(client);
 
   require("./src/handlers/commandHandler.js")(client);
