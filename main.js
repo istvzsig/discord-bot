@@ -10,6 +10,7 @@ async function start() {
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers],
   });
   client.commands = new Collection();
+  client.embeds = require("./src/utility/embeds.js");
 
   logger.info("Bot is starting...");
 
