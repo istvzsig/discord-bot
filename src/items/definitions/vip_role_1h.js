@@ -1,9 +1,9 @@
 module.exports = {
-  id: "xp_boost_1h",
-  name: "1 Hour XP Booster",
+  id: "vip_role_1h",
+  name: "1 Hour VIP role",
   category: "game",
   rarity: "common",
-  price: 250,
+  price: 750,
   effects: [
     {
       type: "xp_multiplier",
