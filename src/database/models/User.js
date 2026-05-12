@@ -40,7 +40,14 @@ module.exports = mongoose.model(
     },
 
     inventory: {
-      type: Array,
+      type: [
+        {
+          itemId: String,
+          name: String,
+          type: String,
+          purchasedAt: Date,
+        },
+      ],
       default: [],
     },
 
