@@ -6,7 +6,7 @@ module.exports = {
   category: "Moderation",
   cooldown: 10,
 
-  permissions: ["Admin", "Moderator"],
+  permissions: ["Moderator"],
 
   data: new SlashCommandBuilder()
     .setName("clear")
@@ -25,9 +25,7 @@ module.exports = {
     if (amount < 1 || amount > 100) {
       return await interaction.reply({
         embeds: [
-          embeds.console.warn([
-            `You can only delete between 1 and 100 messages.`,
-          ]),
+          embeds.warning([`You can only delete between 1 and 100 messages.`]),
         ],
       });
     }
