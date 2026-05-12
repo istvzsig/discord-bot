@@ -23,7 +23,6 @@ module.exports = async (interaction, command, client) => {
             `⏳ Wait ${remaining}s before using this command again.`,
           ),
         ],
-        ephemeral: true,
       });
 
       return true;

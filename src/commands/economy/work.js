@@ -27,7 +27,6 @@ module.exports = {
         embeds: [
           client.embeds.warning(`⏳ You are tired. Try again in ${minutes}m.`),
         ],
-        ephemeral: true,
       });
     }
 

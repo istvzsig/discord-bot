@@ -49,7 +49,6 @@ module.exports = {
       } else {
         await interaction.reply({
           embeds: [client.embeds.error("❌ Internal framework error.")],
-          ephemeral: true,
         });
       }
     }

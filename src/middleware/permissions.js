@@ -25,7 +25,6 @@ module.exports = async (interaction, command, client) => {
   if (!hasRole) {
     await interaction.reply({
       embeds: [client.embeds.error("❌ You do not have permission.")],
-      ephemeral: true,
     });
 
     return true;
