@@ -2,8 +2,10 @@ require("dotenv").config();
 
 const fs = require("fs");
 const path = require("path");
-
 const { REST, Routes } = require("discord.js");
+
+const config = require("../config/config.js");
+const logger = require("../utility/logger.js");
 
 const commands = [];
 
@@ -21,24 +23,19 @@ for (const folder of commandFolders) {
   }
 }
 
-const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
+const rest = new REST({ version: "10" }).setToken(config.BOT_TOKEN);
 
 (async () => {
   try {
-    console.log("Deploying commands...");
-    console.log("CLIENT_ID:", process.env.CLIENT_ID);
-    console.log("GUILD_ID:", process.env.GUILD_ID);
+    logger.info("Deploying commands...");
 
-    await rest.put(
-      Routes.applicationGuildCommands(
-        process.env.CLIENT_ID,
-        process.env.GUILD_ID,
-      ),
+    const resp = await rest.put(
+      Routes.applicationGuildCommands(config.CLIENT_ID, config.GUILD_ID),
       { body: commands },
     );
 
-    console.log("Commands deployed.");
+    logger.info("Commands deployed.");
   } catch (error) {
-    console.error(error);
+    logger.error(error);
   }
 })();
