@@ -51,6 +51,11 @@ module.exports = mongoose.model(
       default: [],
     },
 
+    activeEffects: {
+      type: Array,
+      default: [],
+    },
+
     transactions: {
       type: Array,
       default: [],
