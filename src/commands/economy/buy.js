@@ -20,7 +20,6 @@ module.exports = {
     if (result.error) {
       return interaction.reply({
         embeds: [client.embeds.error(result.error)],
-        ephemeral: true,
       });
     }
 

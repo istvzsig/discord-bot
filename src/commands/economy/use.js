@@ -22,7 +22,6 @@ module.exports = {
     if (!item) {
       return interaction.reply({
         embeds: [client.embeds.error("Invalid item.")],
-        ephemeral: true,
       });
     }
 
@@ -37,7 +36,6 @@ module.exports = {
     if (!invItem) {
       return interaction.reply({
         embeds: [client.embeds.error("You don't own this item.")],
-        ephemeral: true,
       });
     }
 
