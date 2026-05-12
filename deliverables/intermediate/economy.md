@@ -5,6 +5,7 @@
 - coins balance
 - daily reward
 - work command
+- leaderboard
 - shop system
 
 **Teaches:**
