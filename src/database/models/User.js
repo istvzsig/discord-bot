@@ -28,5 +28,35 @@ module.exports = mongoose.model(
       type: Number,
       default: 0,
     },
+
+    lastDaily: {
+      type: Number,
+      default: 0,
+    },
+
+    lastWork: {
+      type: Number,
+      default: 0,
+    },
+
+    inventory: {
+      type: Array,
+      default: [],
+    },
+
+    transactions: {
+      type: Array,
+      default: [],
+    },
+
+    version: {
+      type: Number,
+      default: 1,
+    },
+
+    updatedAt: {
+      type: Date,
+      default: Date.now,
+    },
   }),
 );
