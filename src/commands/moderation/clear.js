@@ -6,6 +6,8 @@ module.exports = {
   category: "Moderation",
   cooldown: 10,
 
+  permissions: ["Admin", "Moderator"],
+
   data: new SlashCommandBuilder()
     .setName("clear")
     .setDescription("Delete a number of messages from chat")
