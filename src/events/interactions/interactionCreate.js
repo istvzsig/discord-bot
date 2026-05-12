@@ -1,5 +1,9 @@
 const embeds = require("../../utility/embeds");
 
+// An interaction is ANY action a user performs that expects a bot response.
+// User Action → Discord API → interactionCreate event → your bot handles it
+// Run this file EVERY TIME any interaction happens.”
+
 const cooldowns = new Map();
 
 module.exports = {
