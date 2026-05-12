@@ -1,12 +1,14 @@
-const embeds = require("../utility/embeds.js");
-
 const cooldowns = new Map();
 
-async function handleCooldown(interaction, command, embeds) {
-  if (!command.cooldown) return false;
+module.exports = async (interaction, command, client) => {
+  if (!command.cooldown) {
+    return false;
+  }
 
   const key = `${interaction.user.id}-${command.data.name}`;
+
   const currentTime = Date.now();
+
   const cooldownAmount = command.cooldown * 1000;
 
   if (cooldowns.has(key)) {
@@ -17,7 +19,7 @@ async function handleCooldown(interaction, command, embeds) {
 
       await interaction.reply({
         embeds: [
-          embeds.warning(
+          client.embeds.warning(
             `⏳ Wait ${remaining}s before using this command again.`,
           ),
         ],
@@ -35,8 +37,4 @@ async function handleCooldown(interaction, command, embeds) {
   }, cooldownAmount);
 
   return false;
-}
-
-module.exports = {
-  handleCooldown,
 };
