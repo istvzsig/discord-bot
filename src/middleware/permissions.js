@@ -1,7 +1,6 @@
 const { PermissionFlagsBits } = require("discord.js");
 
-async function handlePermissions(interaction, command, embeds) {
-  // No permissions required
+module.exports = async (interaction, command, client) => {
   if (!command.permissions?.length) {
     return false;
   }
@@ -25,9 +24,7 @@ async function handlePermissions(interaction, command, embeds) {
 
   if (!hasRole) {
     await interaction.reply({
-      embeds: [
-        embeds.error("❌ You do not have permission to use this command."),
-      ],
+      embeds: [client.embeds.error("❌ You do not have permission.")],
       ephemeral: true,
     });
 
@@ -35,8 +32,4 @@ async function handlePermissions(interaction, command, embeds) {
   }
 
   return false;
-}
-
-module.exports = {
-  handlePermissions,
 };
