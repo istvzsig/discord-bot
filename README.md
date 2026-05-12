@@ -124,7 +124,8 @@ Before deploying to real users:
 <a id="economy"></a>
 **Economy Systems**
 
-- ⬜ [Economy system](./deliverables/intermediate/economy.md)
+- ✅ [Economy system](./deliverables/intermediate/economy.md)
+- ⬜ [Item system](./deliverables/intermediate/items.md)
 - ⬜ [Ticket system](./deliverables/intermediate/ticket.md)
 - ⬜ [Leveling / XP system](./deliverables/intermediate/leveling.md)
 - ⬜ [Reaction roles](./deliverables/intermediate/reactions.md)
