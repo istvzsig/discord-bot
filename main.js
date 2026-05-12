@@ -4,18 +4,21 @@ const { Client, Collection, GatewayIntentBits } = require("discord.js");
 
 const { BOT_TOKEN } = require("./src/config/config.js");
 const logger = require("./src/utility/logger.js");
+const db = require("./src/database");
+
 const connectMongo = require("./src/database/connect.js");
 
 async function start() {
   const client = await new Client({
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers],
   });
+  client.db = db;
   client.commands = new Collection();
   client.embeds = require("./src/utility/embeds.js");
 
   logger.info("Bot is starting...");
 
-  await connectMongo();
+  await connectMongo(client);
 
   require("./src/handlers/commandHandler.js")(client);
   require("./src/handlers/eventHandler.js")(client);
