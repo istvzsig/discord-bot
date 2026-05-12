@@ -113,21 +113,23 @@ Before deploying to real users:
 - ✅ Centralized error handling
 - ✅ Command metadata system
 
+<a id="intermediate"></a>
+
 ### 😺 Intermediate
 
 **Database Layer**
 
-- ⬜ MongoDB integration
-- ⬜ Mongoose models
-- ⬜ Persistent user profiles
+- ⬜ [MongoDB integration](./deliverables/intermediate/mongodb.md)
 
-**Community Systems**
+<a id="economy"></a>
+**Economy Systems**
 
-- ⬜ Economy system
-- ⬜ Ticket system
-- ⬜ Leveling / XP system
-- ⬜ Reaction roles
+- ⬜ [Economy system](./deliverables/intermediate/economy.md)
+- ⬜ [Ticket system](./deliverables/intermediate/ticket.md)
+- ⬜ [Leveling / XP system](./deliverables/intermediate/leveling.md)
+- ⬜ [Reaction roles](./deliverables/intermediate/reactions.md)
 
+<a id="framework-expansion"></a>
 **Framework Expansion**
 
 - ⬜ Button interaction handler
@@ -137,8 +139,11 @@ Before deploying to real users:
 - ⬜ Command analytics/logging
 - ⬜ Configuration manager
 
+<a id="pro"></a>
+
 ### 🦍 Pro
 
+<a id="scaling-and-infrastructure"></a>
 **Scaling & Infrastructure**
 
 - ⬜ Sharding
@@ -147,6 +152,7 @@ Before deploying to real users:
 - ⬜ PM2 process management
 - ⬜ Horizontal scaling
 
+<a id="web-systems"></a>
 **Web Systems**
 
 - ⬜ Web dashboard (React / Next.js)
@@ -154,12 +160,14 @@ Before deploying to real users:
 - ⬜ Guild management panel
 - ⬜ Real-time bot monitoring
 
+<a id="ai-and-automation"></a>
 **AI & Automation**
 
 - ⬜ AI chatbot integration
 - ⬜ AI moderation tools
 - ⬜ AI memory/context system
 
+<a id="audio-systems"></a>
 **Audio Systems**
 
 - ⬜ Music system (Lavalink)
