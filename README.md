@@ -119,7 +119,7 @@ Before deploying to real users:
 
 **Database Layer**
 
-- ⬜ [MongoDB integration](./deliverables/intermediate/mongodb.md)
+- ✅ [MongoDB integration](./deliverables/intermediate/mongodb.md)
 
 <a id="economy"></a>
 **Economy Systems**
