@@ -9,15 +9,15 @@ module.exports = {
 
     for (const file of files) {
       const item = require(`./definitions/${file}`);
-      this.items.set(item.id, item);
+      items.set(item.id, item);
     }
   },
 
   get(id) {
-    return this.items.get(id);
+    return items.get(id);
   },
 
   getAll() {
-    return [...this.items.values()];
+    return [...items.values()];
   },
 };

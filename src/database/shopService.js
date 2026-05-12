@@ -1,17 +1,19 @@
 const mongoose = require("mongoose");
-const User = require("./models/User");
-const shopItems = require("../config/shopItems");
 
-const shopService = {
+const User = require("./models/User");
+const registry = require("../items/itemRegistry");
+
+module.exports = {
   getItem(itemId) {
-    return shopItems.find((i) => i.id === itemId);
+    return registry.get(itemId);
   },
 
   async buyItem(userId, itemId) {
     const session = await mongoose.startSession();
-    session.startTransaction();
 
     try {
+      session.startTransaction();
+
       const item = this.getItem(itemId);
 
       if (!item) {
@@ -28,21 +30,18 @@ const shopService = {
         return { error: "User not found" };
       }
 
-      // ❌ insufficient funds
       if (user.balance < item.price) {
         await session.abortTransaction();
         session.endSession();
         return { error: "Not enough coins" };
       }
 
-      // 💸 deduct balance
       user.balance -= item.price;
 
-      // 🎒 add item
       user.inventory.push({
         itemId: item.id,
         name: item.name,
-        type: item.type,
+        type: item.category,
         purchasedAt: new Date(),
       });
 
@@ -51,10 +50,7 @@ const shopService = {
       await session.commitTransaction();
       session.endSession();
 
-      return {
-        success: true,
-        item,
-      };
+      return { success: true, item };
     } catch (err) {
       await session.abortTransaction();
       session.endSession();
@@ -63,5 +59,3 @@ const shopService = {
     }
   },
 };
-
-module.exports = shopService;

@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 
-const shop = require("../../config/shopItems.js");
+const registry = require("../../items/itemRegistry.js");
 
 module.exports = {
   category: "Economy",
@@ -10,8 +10,14 @@ module.exports = {
     .setDescription("View available shop items"),
 
   async execute(interaction, client) {
-    const list = shop
-      .map((i) => `🛒 **${i.name}** - ${i.price} coins\nID: \`${i.id}\``)
+    const items = registry.getAll();
+
+    const list = items
+      .map((i) => {
+        const price = i.price ?? 0;
+
+        return `🛒 **${i.name}** - ${price} coins\nID: \`${i.id}\``;
+      })
       .join("\n\n");
 
     return interaction.reply({
