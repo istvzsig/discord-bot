@@ -5,81 +5,52 @@
 const embeds = require("../../utility/embeds.js");
 const logger = require("../../utility/logger.js");
 
-const { handlePermissions } = require("../../middleware/permissions");
+const runMiddlewares = require("../../utility/runMiddlewares.js");
 
-const { handleCooldown } = require("../../middleware/cooldowns");
+const permissions = require("../../middleware/permissions.js");
+const cooldowns = require("../../middleware/cooldowns.js");
 
 module.exports = {
   name: "interactionCreate",
 
   async execute(interaction, client) {
-    logger.info("Interaction received");
-
     try {
       if (!interaction.isChatInputCommand()) return;
 
-      logger.info("Slash command detected");
-
       const command = client.commands.get(interaction.commandName);
 
-      if (!command) {
-        logger.warn("Command not found");
-        return;
-      }
-
-      logger.info(`Running command: ${command.data.name}`);
+      if (!command) return;
 
       // =========================
-      // PERMISSIONS
+      // MIDDLEWARE PIPELINE
       // =========================
 
-      const blockedByPermissions = await handlePermissions(
+      const stopped = await runMiddlewares(
+        [permissions, cooldowns],
         interaction,
         command,
-        embeds,
+        client,
       );
 
-      if (blockedByPermissions) {
-        logger.warn("Blocked by permissions");
-        return;
-      }
+      if (stopped) return;
 
       // =========================
-      // COOLDOWNS
-      // =========================
-
-      const onCooldown = await handleCooldown(interaction, command, embeds);
-
-      if (onCooldown) {
-        logger.warn("Blocked by cooldown");
-        return;
-      }
-
-      // =========================
-      // EXECUTE
+      // EXECUTE COMMAND
       // =========================
 
       await command.execute(interaction, client);
-
-      logger.info("Command executed successfully");
     } catch (error) {
-      console.error("INTERACTION ERROR:");
       console.error(error);
 
-      try {
-        if (interaction.replied || interaction.deferred) {
-          await interaction.followUp({
-            embeds: [embeds.error("❌ Internal framework error.")],
-          });
-        } else {
-          await interaction.reply({
-            embeds: [embeds.error("❌ Internal framework error.")],
-            ephemeral: true,
-          });
-        }
-      } catch (replyError) {
-        console.error("FAILED TO REPLY:");
-        console.error(replyError);
+      if (interaction.replied || interaction.deferred) {
+        await interaction.followUp({
+          embeds: [client.embeds.error("❌ Internal framework error.")],
+        });
+      } else {
+        await interaction.reply({
+          embeds: [client.embeds.error("❌ Internal framework error.")],
+          ephemeral: true,
+        });
       }
     }
   },
