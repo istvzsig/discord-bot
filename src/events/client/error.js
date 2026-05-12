@@ -4,7 +4,7 @@ module.exports = {
   name: "error",
   once: false,
 
-  execute(client) {
+  async execute(client) {
     logger.error("Client error: " + err.message);
   },
 };

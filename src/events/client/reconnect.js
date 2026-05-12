@@ -4,7 +4,7 @@ module.exports = {
   name: "shardReconnecting",
   once: false,
 
-  execute(client) {
+  async execute(client) {
     logger.warn("Bot is reconnecting...");
   },
 };

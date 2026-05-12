@@ -4,7 +4,7 @@ module.exports = {
   name: "shardDisconnect",
   once: false,
 
-  execute(client) {
+  async execute(client) {
     logger.error("Bot disconnected from Discord!");
   },
 };
