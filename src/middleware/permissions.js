@@ -1,14 +1,29 @@
+const { PermissionFlagsBits } = require("discord.js");
+
 async function handlePermissions(interaction, command, embeds) {
   // No permissions required
   if (!command.permissions?.length) {
     return false;
   }
 
-  const hasPermission = interaction.member.roles.cache.some((role) =>
+  const member = interaction.member;
+
+  // Server owner bypass
+  if (interaction.guild.ownerId === member.id) {
+    return false;
+  }
+
+  // Discord administrator bypass
+  if (member.permissions.has(PermissionFlagsBits.Administrator)) {
+    return false;
+  }
+
+  // Role-based permissions
+  const hasRole = member.roles.cache.some((role) =>
     command.permissions.includes(role.name),
   );
 
-  if (!hasPermission) {
+  if (!hasRole) {
     await interaction.reply({
       embeds: [
         embeds.error("❌ You do not have permission to use this command."),
