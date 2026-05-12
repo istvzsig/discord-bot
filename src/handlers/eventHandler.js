@@ -14,8 +14,6 @@ module.exports = (client) => {
     for (const file of eventFiles) {
       const event = require(`${EVENT_DIR}/${folder}/${file}`);
 
-      console.log(event);
-
       if (event.once) {
         client.once(event.name, (...args) => event.execute(...args, client));
       } else {
