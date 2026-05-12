@@ -87,30 +87,84 @@ Before deploying to real users:
 
 ## Roadmap:
 
-**Beginner**
+### 🐟 Beginner
 
-- Help command
-- Embed system
-- Logger
-- Permissions
-- Cooldowns
+**Core Framework**
 
-**Intermediate**
+- ✅ Slash command handler
+- ✅ Dynamic command loader
+- ✅ Dynamic event loader
+- ✅ Interaction router
+- ✅ Modular architecture
 
-- MongoDB
-- Economy system
-- Ticket system
-- Leveling / XP system
-- Reaction roles
+**Utility Systems**
 
-**Advanced**
+- ✅ Help command
+- ✅ Embed system
+- ✅ Logger
+- ✅ Permissions middleware
+- ✅ Cooldown middleware
 
-- Web dashboard (React / Next.js)
-- Music system (Lavalink)
-- AI chatbot integration
-- Sharding
-- Redis caching layer
-- Docker deployment
+**Framework Architecture**
+
+- ✅ Middleware pipeline
+- ✅ Role-based permissions
+- ✅ Admin/server-owner bypass
+- ✅ Centralized error handling
+- ✅ Command metadata system
+
+### 😺 Intermediate
+
+**Database Layer**
+
+- ⬜ MongoDB integration
+- ⬜ Mongoose models
+- ⬜ Persistent user profiles
+
+**Community Systems**
+
+- ⬜ Economy system
+- ⬜ Ticket system
+- ⬜ Leveling / XP system
+- ⬜ Reaction roles
+
+**Framework Expansion**
+
+- ⬜ Button interaction handler
+- ⬜ Modal handler
+- ⬜ Select menu handler
+- ⬜ Unified middleware runner
+- ⬜ Command analytics/logging
+- ⬜ Configuration manager
+
+### 🦍 Pro
+
+**Scaling & Infrastructure**
+
+- ⬜ Sharding
+- ⬜ Redis caching layer
+- ⬜ Docker deployment
+- ⬜ PM2 process management
+- ⬜ Horizontal scaling
+
+**Web Systems**
+
+- ⬜ Web dashboard (React / Next.js)
+- ⬜ Discord OAuth2 login
+- ⬜ Guild management panel
+- ⬜ Real-time bot monitoring
+
+**AI & Automation**
+
+- ⬜ AI chatbot integration
+- ⬜ AI moderation tools
+- ⬜ AI memory/context system
+
+**Audio Systems**
+
+- ⬜ Music system (Lavalink)
+- ⬜ Queue manager
+- ⬜ Voice channel middleware
 
 ## Deployment Ideas:
 
