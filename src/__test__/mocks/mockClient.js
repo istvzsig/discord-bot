@@ -20,6 +20,12 @@ module.exports = {
         content: msg,
       };
     },
+    warn(content) {
+      return {
+        type: "warn",
+        content,
+      };
+    },
   },
 
   commands: new Map(),

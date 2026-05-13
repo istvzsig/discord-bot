@@ -3,11 +3,11 @@ const mockMongoDB = require("../mockMongoDB.js");
 const { runCommand } = require("../../runCommand.js");
 const { expectEqual } = require("../../assert.js");
 
-async function runEconomyFlowTest() {
+async function testEconomyFlow() {
   console.log("\n=== ECONOMY FLOW TEST ===");
 
   // reset fake DB
-  // mockMongoDB.reset();
+  mockMongoDB.reset();
 
   // create fake user
   mockMongoDB.seedUser("user1", {
@@ -33,5 +33,5 @@ async function runEconomyFlowTest() {
 }
 
 module.exports = {
-  runEconomyFlowTest,
+  testEconomyFlow,
 };
