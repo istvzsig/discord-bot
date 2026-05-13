@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 
-const User = require("../../database/models/User");
+const User = require("../../database/models/User.js");
 
 module.exports = {
   category: "Economy",

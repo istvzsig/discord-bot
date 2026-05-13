@@ -1,4 +1,4 @@
-const logger = require("../../utility/logger.js");
+const logger = require("../../utils/logger.js");
 
 module.exports = {
   name: "shardDisconnect",

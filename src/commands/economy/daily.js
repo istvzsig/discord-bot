@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 
-const { getUser } = require("../../database/helper.js");
+const { getUser } = require("../../services/userService.js");
 
 const COOLDOWN = 24 * 60 * 60 * 1000; // 24h
 

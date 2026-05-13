@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const User = require("./models/User");
+const User = require("../database/models/User.js");
 const registry = require("../items/itemRegistry");
 
 module.exports = {

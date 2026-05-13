@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 
-const embeds = require("../../utility/embeds");
+const embeds = require("../../utils/embeds.js");
 
 module.exports = {
   category: "Moderation",

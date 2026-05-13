@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 
-const shop = require("../../database/shopService");
+const shopService = require("../../services/shopService.js");
 
 module.exports = {
   category: "Economy",
@@ -15,7 +15,7 @@ module.exports = {
   async execute(interaction, client) {
     const itemId = interaction.options.getString("item");
 
-    const result = await shop.buyItem(interaction.user.id, itemId);
+    const result = await shopService.buyItem(interaction.user.id, itemId);
 
     if (result.error) {
       return interaction.reply({

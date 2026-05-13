@@ -1,5 +1,5 @@
-const { addXp } = require("../../services/earnXp");
-const User = require("../../database/models/User");
+const User = require("../../database/models/User.js");
+const { addXp } = require("../../services/earnXp.js");
 
 module.exports = {
   name: "messageCreate",

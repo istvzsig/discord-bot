@@ -4,33 +4,31 @@ const fs = require("fs");
 const path = require("path");
 const { REST, Routes } = require("discord.js");
 
-const config = require("../config/config.js");
-const logger = require("../utility/logger.js");
+const { CLIENT_ID, GUILD_ID, BOT_TOKEN } = require("../config/config.js");
+const logger = require("../utils/logger.js");
+
+const rest = new REST({ version: "10" }).setToken(BOT_TOKEN);
 
 const commands = [];
-
 const commandFolders = fs.readdirSync(path.join(__dirname, "../commands"));
 
-for (const folder of commandFolders) {
-  const commandFiles = fs
-    .readdirSync(path.join(__dirname, `../commands/${folder}`))
-    .filter((file) => file.endsWith(".js"));
+async function deploy() {
+  for (const folder of commandFolders) {
+    const commandFiles = fs
+      .readdirSync(path.join(__dirname, `../commands/${folder}`))
+      .filter((file) => file.endsWith(".js"));
 
-  for (const file of commandFiles) {
-    const command = require(`../commands/${folder}/${file}`);
+    for (const file of commandFiles) {
+      const command = require(`../commands/${folder}/${file}`);
 
-    commands.push(command.data.toJSON());
+      commands.push(command.data.toJSON());
+    }
   }
-}
-
-const rest = new REST({ version: "10" }).setToken(config.BOT_TOKEN);
-
-(async () => {
   try {
     logger.info("Deploying commands...");
 
     const resp = await rest.put(
-      Routes.applicationGuildCommands(config.CLIENT_ID, config.GUILD_ID),
+      Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID),
       { body: commands },
     );
 
@@ -38,4 +36,6 @@ const rest = new REST({ version: "10" }).setToken(config.BOT_TOKEN);
   } catch (error) {
     logger.error(error);
   }
-})();
+}
+
+deploy();

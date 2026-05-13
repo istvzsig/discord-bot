@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const { MONGO_URI } = require("../config/config.js");
-const logger = require("../utility/logger.js");
+const logger = require("../utils/logger.js");
 
 module.exports = async function connectMongo() {
   try {

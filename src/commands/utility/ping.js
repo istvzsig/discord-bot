@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require("discord.js");
 
-const embeds = require("../../utility/embeds");
-const { permissions } = require("../moderation/clear");
+const embeds = require("../../utils/embeds.js");
+const { permissions } = require("../moderation/clear.js");
 
 module.exports = {
   category: "Utility",
