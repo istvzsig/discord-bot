@@ -9,33 +9,52 @@ module.exports = {
   },
 
   async buyItem(userId, itemId) {
-    const session = await mongoose.startSession();
+    let session = null;
+
+    // ========================
+    // SESSION HANDLING
+    // ========================
+    if (!process.env.NODE_ENV === "test") {
+      session = await mongoose.startSession();
+      session.startTransaction();
+    }
 
     try {
-      session.startTransaction();
-
       const item = this.getItem(itemId);
 
       if (!item) {
-        await session.abortTransaction();
-        session.endSession();
+        if (session) {
+          await session.abortTransaction();
+          session.endSession();
+        }
         return { error: "Item not found" };
       }
 
-      const user = await User.findOne({ userId }, null, { session });
+      const user = await User.findOne(
+        { userId },
+        null,
+        session ? { session } : undefined,
+      );
 
       if (!user) {
-        await session.abortTransaction();
-        session.endSession();
+        if (session) {
+          await session.abortTransaction();
+          session.endSession();
+        }
         return { error: "User not found" };
       }
 
       if (user.balance < item.price) {
-        await session.abortTransaction();
-        session.endSession();
+        if (session) {
+          await session.abortTransaction();
+          session.endSession();
+        }
         return { error: "Not enough coins" };
       }
 
+      // ========================
+      // TRANSACTION LOGIC
+      // ========================
       user.balance -= item.price;
 
       user.inventory.push({
@@ -45,16 +64,23 @@ module.exports = {
         purchasedAt: new Date(),
       });
 
-      await user.save({ session });
+      await user.save(session ? { session } : undefined);
 
-      await session.commitTransaction();
-      session.endSession();
+      if (session) {
+        await session.commitTransaction();
+        session.endSession();
+      }
 
-      return { success: true, item };
+      return {
+        success: true,
+        item,
+      };
     } catch (err) {
-      await session.abortTransaction();
-      session.endSession();
-
+      if (session) {
+        await session.abortTransaction();
+        session.endSession();
+      }
+      console.error("BUY ERROR:", err);
       return { error: "Transaction failed" };
     }
   },
