@@ -16,18 +16,18 @@ module.exports = {
 
     const newLevel = calculateLevel(user.xp);
 
-    let leveledUp = false;
+    let levelUp = false;
 
     if (newLevel > user.level) {
       user.level = newLevel;
-      leveledUp = true;
+      levelUp = true;
     }
 
     await user.save();
 
     return {
       gained,
-      leveledUp,
+      levelUp,
       level: user.level,
     };
   },

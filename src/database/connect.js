@@ -6,9 +6,9 @@ const logger = require("../utils/logger.js");
 module.exports = async function connectMongo() {
   try {
     await mongoose.connect(MONGO_URI);
-    logger.info("[DB] MongoDB connected successfully");
+    logger.info("MongoDB connected successfully");
   } catch (err) {
-    logger.error("[DB] Connection failed:", err);
+    logger.error("Connection failed:", err);
     process.exit(1);
   }
 };

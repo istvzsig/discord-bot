@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const User = require("../database/models/User.js");
-const registry = require("../items/itemRegistry");
+const registry = require("../items/itemRegistry.js");
 
 module.exports = {
   getItem(itemId) {
