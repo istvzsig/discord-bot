@@ -1,9 +1,17 @@
-module.exports = {
-  async getUser(client, userId) {
-    if (!client.db || !client.db.users) {
-      throw new Error("DB not initialized on client.db");
-    }
+const User = require("../database/models/User.js");
 
-    return await client.db.users.ensure(userId);
-  },
+async function getUser(userId) {
+  let user = await User.findOne({ userId });
+
+  if (!user) {
+    user = await User.create({
+      userId,
+    });
+  }
+
+  return user;
+}
+
+module.exports = {
+  getUser,
 };

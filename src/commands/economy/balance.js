@@ -11,7 +11,7 @@ module.exports = {
     .setDescription("Check your balance"),
 
   async execute(interaction, client) {
-    const user = await getUser(client, interaction.user.id);
+    const user = await getUser(interaction.user.id);
 
     return interaction.reply({
       embeds: [client.embeds.success(`💰 Balance: **${user.balance} coins**`)],

@@ -15,7 +15,7 @@ module.exports = {
     .setDescription("Work to earn coins"),
 
   async execute(interaction, client) {
-    const user = await getUser(client, interaction.user.id);
+    const user = await getUser(interaction.user.id);
 
     const now = Date.now();
 
