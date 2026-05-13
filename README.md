@@ -34,6 +34,7 @@ GUILD_ID=your_guild_id_here
 PERMISSION_INT=bot_premission_integer
 NODE_ENV=development
 LOG_LEVEL=info
+MONGO_URI=mongodb-uri
 ```
 
 **Deploy commands:**
