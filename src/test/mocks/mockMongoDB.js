@@ -1,14 +1,22 @@
 const users = new Map();
 
-function seedUser(userId, data = {}) {
-  users.set(userId, {
-    userId,
-    balance: 1000,
-    xp: 0,
-    level: 1,
-    inventory: [],
-    ...data,
-  });
+function createMockUser(data = {}) {
+  return {
+    userId: data.userId,
+
+    balance: data.balance ?? 0,
+
+    xp: data.xp ?? 0,
+
+    level: data.level ?? 1,
+
+    inventory: data.inventory ?? [],
+
+    async save() {
+      users.set(this.userId, this);
+      return this;
+    },
+  };
 }
 
 const User = {
@@ -17,32 +25,34 @@ const User = {
   },
 
   async create(data) {
-    users.set(data.userId, {
-      userId: data.userId,
-      balance: 0,
-      xp: 0,
-      level: 0,
-      inventory: [],
-      ...data,
-    });
+    const user = createMockUser(data);
 
-    return users.get(data.userId);
-  },
+    users.set(user.userId, user);
 
-  async updateOne(query, update) {
-    const user = users.get(query.userId);
-    if (!user) return;
-
-    Object.assign(user, update.$set || {});
     return user;
   },
-
-  _dump() {
-    return [...users.values()];
-  },
 };
+
+function seedUser(userId, data = {}) {
+  const user = createMockUser({
+    userId,
+    ...data,
+  });
+
+  users.set(userId, user);
+}
+
+function getUser(userId) {
+  return users.get(userId);
+}
+
+function reset() {
+  users.clear();
+}
 
 module.exports = {
   User,
   seedUser,
+  getUser,
+  reset,
 };

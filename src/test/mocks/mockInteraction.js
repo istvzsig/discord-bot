@@ -1,5 +1,5 @@
 module.exports = {
-  createInteraction({
+  createMockInteraction({
     userId = "test-user",
     commandName = "unknown",
     options = {},

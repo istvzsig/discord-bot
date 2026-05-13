@@ -3,20 +3,19 @@ const path = require("path");
 const mockDB = require("./src/test/mocks/mockMongoDB.js");
 
 mockDB.seedUser("123456789", {
-  balance: 5555,
+  balance: 1000,
 });
 
 require.cache[require.resolve("./src/database/models/User")] = {
   exports: mockDB.User,
 };
 
-const { runCommand } = require("./src/test/runCommand.js");
+const {
+  runEconomyFlowTest,
+} = require("./src/test/mocks/scenarios/economyFlow.js");
 
 async function test() {
-  await runCommand({
-    commandPath: "./src/commands/economy/balance.js",
-    userId: "123456789",
-  });
+  await runEconomyFlowTest();
 }
 
 test().catch((err) => {
