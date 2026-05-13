@@ -28,7 +28,7 @@ cp .env.template .env
 **Rotate the values:**
 
 ```env
-TOKEN=your_bot_token_here
+BOT_TOKEN=your_bot_token_here
 CLIENT_ID=your_application_client_id_here
 GUILD_ID=your_guild_id_here
 PERMISSION_INT=bot_premission_integer
