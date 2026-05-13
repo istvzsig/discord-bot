@@ -1,12 +1,13 @@
-const { exec } = require("child_process");
-const config = require("./src/config/config.js");
+require("dotenv").config();
 
-console.log("Invite bot:", config.BOT_INVITE_URL);
+const { exec } = require("child_process");
+
+const { BOT_INVITE_URL } = require("./src/config/config.js");
+console.log("Invite bot:", BOT_INVITE_URL);
 
 // macOS
-if (process.platform === "darwin") exec(`open "${config.BOT_INVITE_URL}"`);
+if (process.platform === "darwin") exec(`open "${BOT_INVITE_URL}"`);
 // Windows
-else if (process.platform === "win32")
-  exec(`start "" "${config.BOT_INVITE_URL}"`);
+else if (process.platform === "win32") exec(`start "" "${BOT_INVITE_URL}"`);
 // Linux (xdg-open)
-else exec(`xdg-open "${config.BOT_INVITE_URL}"`);
+else exec(`xdg-open "${BOT_INVITE_URL}"`);
