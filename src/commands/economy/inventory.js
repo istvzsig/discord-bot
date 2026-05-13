@@ -1,6 +1,8 @@
 const { SlashCommandBuilder } = require("discord.js");
 
-const User = require("../../database/models/User.js");
+const User = require("../../database/models/User");
+
+const registry = require("../../items/itemRegistry");
 
 module.exports = {
   category: "Economy",
@@ -20,8 +22,20 @@ module.exports = {
       });
     }
 
+    // ========================
+    // RESOLVE ITEM DEFINITIONS
+    // ========================
+
     const items = user.inventory
-      .map((i) => `🎒 **${i.name}** (${i.type})`)
+      .map((entry) => {
+        const item = registry.get(entry.itemId);
+
+        if (!item) {
+          return `❓ Unknown Item (${entry.itemId})`;
+        }
+
+        return `🎒 **${item.name}** ` + `(${item.category}) x${entry.quantity}`;
+      })
       .join("\n");
 
     return interaction.reply({

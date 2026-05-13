@@ -39,17 +39,7 @@ module.exports = mongoose.model(
       default: 0,
     },
 
-    inventory: {
-      type: [
-        {
-          itemId: String,
-          name: String,
-          type: String,
-          purchasedAt: Date,
-        },
-      ],
-      default: [],
-    },
+    inventory: [],
 
     activeEffects: {
       type: Array,
