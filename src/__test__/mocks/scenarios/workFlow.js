@@ -3,7 +3,7 @@ const mockMongoDB = require("../mockMongoDB.js");
 const { runCommand } = require("../../runCommand.js");
 const { expectEqual } = require("../../assert.js");
 
-async function testEconomyFlow() {
+async function testWorkFlow() {
   console.log("\n=== ECONOMY FLOW TEST ===");
 
   // reset fake DB
@@ -33,5 +33,5 @@ async function testEconomyFlow() {
 }
 
 module.exports = {
-  testEconomyFlow,
+  testWorkFlow,
 };

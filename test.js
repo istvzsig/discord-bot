@@ -26,9 +26,7 @@ require.cache[require.resolve("./src/database/models/User.js")] = {
 // ========================
 // TEST CASES
 // ========================
-const {
-  testEconomyFlow,
-} = require("./src/__test__/mocks/scenarios/economyFlow.js");
+const { testWorkFlow } = require("./src/__test__/mocks/scenarios/workFlow.js");
 
 const { testShopFlow } = require("./src/__test__/mocks/scenarios/shopFlow.js");
 
@@ -38,7 +36,7 @@ async function runTests() {
   console.log("======================\n");
 
   const tests = [
-    testEconomyFlow,
+    testWorkFlow,
     testShopFlow,
     // add more tests
   ];
