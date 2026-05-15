@@ -2,13 +2,12 @@
 // User Action → Discord API → interactionCreate event → your bot handles it
 // Run this file EVERY TIME any interaction happens.”
 
-const embeds = require("../../utils/embeds.js");
-const logger = require("../../utils/logger.js");
+const embeds = require("../utils/embeds.js");
+const logger = require("../utils/logger.js");
+const runMiddlewares = require("../utils/runMiddlewares.js");
 
-const runMiddlewares = require("../../utils/runMiddlewares.js");
-
-const permissions = require("../../middleware/permissions.js");
-const cooldowns = require("../../middleware/cooldowns.js");
+const permissions = require("../middleware/permissions.js");
+const cooldowns = require("../middleware/cooldowns.js");
 
 module.exports = {
   name: "interactionCreate",
