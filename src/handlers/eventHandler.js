@@ -1,10 +1,13 @@
 const fs = require("fs");
 const path = require("path");
 
-module.exports = (client) => {
-  const eventDir = path.join(__dirname, "../events");
+const logger = require("../utils/logger.js");
 
+module.exports = function (client) {
+  const eventDir = path.join(__dirname, "../events");
   const eventFolders = fs.readdirSync(eventDir);
+
+  client._loadedEvents = new Set();
 
   for (const folder of eventFolders) {
     const folderPath = path.join(eventDir, folder);
@@ -18,7 +21,13 @@ module.exports = (client) => {
 
       const event = require(filePath);
 
-      console.log(`Loaded event: ${event.name}`);
+      if (!event.name || !event.execute) {
+        throw new Error(`Invalid event file: ${file}`);
+      }
+
+      logger.info(`Event loaded: ${event.name}`);
+
+      client._loadedEvents.add(event.name);
 
       if (event.once) {
         client.once(event.name, (...args) => event.execute(...args, client));

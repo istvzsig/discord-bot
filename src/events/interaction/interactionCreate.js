@@ -20,6 +20,10 @@ module.exports = {
 
       if (!command) return;
 
+      if (!command.execute) {
+        throw new Error(`Invalid command: ${interaction.commandName}`);
+      }
+
       // =========================
       // MIDDLEWARE PIPELINE
       // =========================
