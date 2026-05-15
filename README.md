@@ -68,7 +68,7 @@ src/
  ├── deploy/          # Command deployment scripts
  ├── events/          # Discord events
  ├── handlers/        # Command & event loaders
- ├── utility/         # Helpers / utilities
+ ├── utils/         # Helpers / utilities
 invite.js             # Open bot invitation in app/browser
 main.js               # Entry point
 ```
