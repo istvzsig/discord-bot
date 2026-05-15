@@ -1,7 +1,7 @@
 module.exports = {
   id: "xp_boost_1h",
   name: "1 Hour XP Booster",
-  category: "game",
+  category: "consumable",
   rarity: "common",
   price: 250,
   effects: [

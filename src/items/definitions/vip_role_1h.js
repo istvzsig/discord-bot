@@ -1,7 +1,7 @@
 module.exports = {
   id: "vip_role_1h",
   name: "1 Hour VIP role",
-  category: "game",
+  category: "consumable",
   rarity: "common",
   price: 750,
   effects: [
