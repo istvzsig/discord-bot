@@ -1,18 +1,24 @@
 const fs = require("fs");
 const path = require("path");
 
-const { EVENT_DIR } = require("../config/config.js");
-
 module.exports = (client) => {
-  const eventFolders = fs.readdirSync(path.join(__dirname, EVENT_DIR));
+  const eventDir = path.join(__dirname, "../events");
+
+  const eventFolders = fs.readdirSync(eventDir);
 
   for (const folder of eventFolders) {
+    const folderPath = path.join(eventDir, folder);
+
     const eventFiles = fs
-      .readdirSync(path.join(__dirname, `${EVENT_DIR}/${folder}`))
-      .filter((file) => file.endsWith(".js"));
+      .readdirSync(folderPath)
+      .filter((f) => f.endsWith(".js"));
 
     for (const file of eventFiles) {
-      const event = require(`${EVENT_DIR}/${folder}/${file}`);
+      const filePath = path.join(folderPath, file);
+
+      const event = require(filePath);
+
+      console.log(`Loaded event: ${event.name}`);
 
       if (event.once) {
         client.once(event.name, (...args) => event.execute(...args, client));
