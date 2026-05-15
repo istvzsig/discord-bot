@@ -28,8 +28,6 @@ async function main() {
   client.login(BOT_TOKEN);
 }
 
-main();
-
-process.on("unhandledRejection", (err) => {
+main().catch((err) => {
   logger.error("Unhandled promise rejection:", err);
 });
