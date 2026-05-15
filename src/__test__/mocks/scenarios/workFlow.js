@@ -4,32 +4,41 @@ const { runCommand } = require("../../runCommand.js");
 const { expectEqual } = require("../../assert.js");
 
 async function testWorkFlow() {
-  console.log("\n=== ECONOMY FLOW TEST ===");
+  const initialBalance = 1000;
 
-  // reset fake DB
+  console.log("\n=== WORK FLOW TEST ===");
+
+  // ========================
+  // RESET FAKE DATABASE
+  // ========================
   mockMongoDB.reset();
 
-  // create fake user
+  // ========================
+  // CREATE FAKE USER
+  // ========================
   mockMongoDB.seedUser("user1", {
-    balance: 1000,
+    balance: initialBalance,
   });
+  console.log("Initial balance:", initialBalance);
 
-  // run command
+  // ========================
+  // RUN COMMAND
+  // ========================
   await runCommand({
     commandPath: "./src/commands/economy/work.js",
-
     userId: "user1",
   });
 
-  // verify state
+  // ========================
+  // VERIFY STATE
+  // ========================
   const user = mockMongoDB.getUser("user1");
-
   console.log("Updated balance:", user.balance);
 
-  // assert result
-  expectEqual("Work command adds money", user.balance > 1000, true);
-
-  console.log("\n🎉 Scenario complete");
+  // ========================
+  // ASSERTIONS
+  // ========================
+  expectEqual("Work command adds money", user.balance > initialBalance, true);
 }
 
 module.exports = {
